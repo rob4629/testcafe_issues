@@ -1,0 +1,21 @@
+{
+  "name": "testcafe_issues",
+  "version": "1.0.0",
+  "description": "Investigate Issues",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rob Cooper",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "testcafe": "^1.8.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rob4629/testcafe_issues.git"
+  }
+}
