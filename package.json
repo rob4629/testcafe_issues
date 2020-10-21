@@ -4,7 +4,8 @@
   "description": "Investigate Issues",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server.js",
+    "test": "testcafe chrome"
   },
   "author": "Rob Cooper",
   "license": "ISC",
@@ -12,7 +13,8 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "testcafe": "^1.8.2"
+    "nodemon": "^2.0.6",
+    "testcafe": "^1.9.4"
   },
   "repository": {
     "type": "git",
