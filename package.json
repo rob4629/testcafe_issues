@@ -2,7 +2,7 @@
   "name": "testcafe_issues",
   "version": "1.0.0",
   "description": "Investigate Issues",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
     "test": "testcafe chrome"
@@ -10,14 +10,18 @@
   "author": "Rob Cooper",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "@babel/runtime": "^7.12.5",
+    "express": "^4.17.1",
+    "testcafe": "^1.9.4"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6",
-    "testcafe": "^1.9.4"
+    "nodemon": "^2.0.6"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/rob4629/testcafe_issues.git"
-  }
+  },
+  "runtimeArgs": [
+    "--preserve-symlinks"
+  ]
 }

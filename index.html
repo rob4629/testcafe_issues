@@ -30,11 +30,11 @@
           function initPayPalButton() {
             paypal.Buttons({
               style: {
-                shape: 'rect',
-                color: 'gold',
-                layout: 'vertical',
-                label: 'paypal',
-
+                shape: 'pill',
+                color: 'blue',
+                label: 'pay',
+                height: 40,
+                layout: 'horizontal',
               },
 
               createOrder: function(data, actions) {
