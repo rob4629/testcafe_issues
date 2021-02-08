@@ -8,10 +8,11 @@ test("Click link to open window", async () => {
     await t.closeWindow(child);
 });
 
-test("Click link within iFrame to open window", async () => {
+test.only("Click link within iFrame to open window", async () => {
     const buttonIframe = Selector('#smart-button-container iframe');
     const payWithPaypalButton = Selector('[data-funding-source="paypal"]');
     const parent = await t.getCurrentWindow();
+    console.log(parent);
     await t
         .switchToIframe(buttonIframe)
         .expect(payWithPaypalButton.with({ visibilityCheck: true }).exists)
@@ -19,8 +20,8 @@ test("Click link within iFrame to open window", async () => {
         .hover(payWithPaypalButton)
         .click(payWithPaypalButton)
         .switchToMainWindow();
-    await t.wait(2000);
     const child = await t.getCurrentWindow();
+    console.log(child);
     await t.closeWindow(child);
 });
 
