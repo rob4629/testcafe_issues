@@ -2,17 +2,10 @@ import { Selector, t } from 'testcafe';
 
 fixture("Multiple Window Testing").page("localhost:4000")
 
-test("Click link to open window", async () => {
-    await t.click(Selector("#click_link"));
-    const child = await t.getCurrentWindow();
-    await t.closeWindow(child);
-});
-
-test.only("Click link within iFrame to open window", async () => {
+const clickPayWithPaypal = async () => {
     const buttonIframe = Selector('#smart-button-container iframe');
     const payWithPaypalButton = Selector('[data-funding-source="paypal"]');
-    const parent = await t.getCurrentWindow();
-    console.log(parent);
+
     await t
         .switchToIframe(buttonIframe)
         .expect(payWithPaypalButton.with({ visibilityCheck: true }).exists)
@@ -20,9 +13,39 @@ test.only("Click link within iFrame to open window", async () => {
         .hover(payWithPaypalButton)
         .click(payWithPaypalButton)
         .switchToMainWindow();
+}
+
+const clickContinueButtonWithRetry = async () => {
+    const acceptAllButton = Selector('#acceptAllButton');
+    const continueButton = Selector('[data-testid="submit-button-initial"]');
+    if (await acceptAllButton.visible) await t.click(acceptAllButton);
+    await t.setNativeDialogHandler(() => true).click(continueButton);
+    if (await continueButton.visible) await t.click(continueButton);
+}
+
+test("Click link to open window", async () => {
+    await t.click(Selector("#click_link"));
     const child = await t.getCurrentWindow();
-    console.log(child);
     await t.closeWindow(child);
+});
+
+test("Enter child window multiple times", async () => {
+    await clickPayWithPaypal();
+
+    await t
+      .typeText(Selector('#email'), 'paypal-regressions-us-cafe@change.org')
+      .click(Selector('#btnNext'))
+      .typeText(Selector('#password'), 'C#6wg??l')
+      .click(Selector('#btnLogin'));
+    await clickContinueButtonWithRetry();
+
+    // Repeat
+    await clickPayWithPaypal();
+    await clickContinueButtonWithRetry();
+
+    // Repeat
+    await clickPayWithPaypal();
+    await t.click(Selector('[data-testid="submit-button-initial"]')).wait(750);
 });
 
 test("Submit form, open window", async () => {
